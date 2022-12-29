@@ -1,0 +1,13 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+tweepy = "==4.12.1"
+
+[requires]
+python_version = "3.10"
+
+[scripts]
+start = "python political-bias/crawler/main.py"
