@@ -201,4 +201,5 @@ poetry.toml
 
 # End of https://www.toptal.com/developers/gitignore/api/jupyternotebooks,python,visualstudiocode
 
-./model/logs
+political-bias/model/checkpoints
+political-bias/model/logs
