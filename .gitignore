@@ -203,3 +203,4 @@ poetry.toml
 
 political-bias/model/checkpoints
 political-bias/model/logs
+__pycache__
