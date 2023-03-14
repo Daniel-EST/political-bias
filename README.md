@@ -1,6 +1,6 @@
 # political-bias
 
-A Transformers-based model that classifies the political bias of Brazilian Portuguese tweets as either conservative, liberal, or neutral. This work was presented as part of a subject at computer and system engineering program.
+A Transformers-based model that classifies the political bias of Brazilian Portuguese tweets as either conservative, liberal, or neutral. This work was presented as part of a subject at computer and system engineering masters program.
 
 # Methodology:
 TODO
