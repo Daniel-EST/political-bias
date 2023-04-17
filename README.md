@@ -1,6 +1,6 @@
 # political-bias
 
-A Transformers-based model that classifies the political bias of Brazilian Portuguese tweets as either conservative, liberal, or neutral. This work was presented as part of a subject at computer and system engineering masters program.
+A Transformers-based model that classifies the political bias of Brazilian Portuguese tweets as either conservative, liberal, or neutral. This work was presented as part of a subject at system engineering and computer science and masters program.
 
 # Methodology:
 This work proposes an approach to classify political bias on Twitter by utilizing [BERTimbau](https://github.com/neuralmind-ai/portuguese-bert), a Portuguese implementation of Google's BERT, using a Post-Based Method strategy. Specifically, posts were gathered from users who had already been categorized according to their political leanings. Additionally, it was supposed that all posts made by an account were inherently aligned with the same political bias as the account's categorization. This led to the collection of 243,624 tweets, with 95,630 classified as conservative, 22,233 as neutral, and 125,761 as liberal. It should be noted that not all tweets collected from an account are necessarily related to politics.
