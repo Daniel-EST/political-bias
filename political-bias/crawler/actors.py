@@ -13,9 +13,9 @@ class Actor:
     @property
     def username(self) -> str:
         return self.__username
-    
+
     @property
-    def spectrum(self) ->  str:
+    def spectrum(self) -> str:
         return self.__spectrum
 
     @property
@@ -25,9 +25,11 @@ class Actor:
     def __str__(self):
         return f"{self.__class__.__name__}(username='@{self.__username}', user_id={self.__id}, spectrum='{self.__spectrum})"
 
+
 def get_actor_user_id(username: str, client: tweepy.Client) -> int:
     user = client.get_user(username=username)
     return user.data.id
+
 
 def get_actors(client: tweepy.Client, file_path: str = 'data/accounts.csv') -> Iterator[Actor]:
     with open(file_path, 'r', encoding="utf-8-sig") as actors_file:

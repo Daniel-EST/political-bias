@@ -6,22 +6,22 @@ from actors import Actor
 
 
 class Tweet:
-    def __init__(self, 
-        id: int, 
-        actor: Actor,
-        withheld: bool,
-        created_at: str,
-        harvested_at: str,
-        conversation_id: int,
-        lang: str,
-        text: str, 
-        public_metrics: Dict[str, int], 
-    ):
+    def __init__(self,
+                 id: int,
+                 actor: Actor,
+                 withheld: bool,
+                 created_at: str,
+                 harvested_at: str,
+                 conversation_id: int,
+                 lang: str,
+                 text: str,
+                 public_metrics: Dict[str, int],
+                 ):
         self.__id = id
         self.__actor = actor
-        self.__withheld = withheld 
+        self.__withheld = withheld
         self.__created_at = created_at
-        self.__harvested_at  = harvested_at
+        self.__harvested_at = harvested_at
         self.__conversation_id = conversation_id
         self.__lang = lang
         self.__text = text
@@ -30,42 +30,42 @@ class Tweet:
     @property
     def id(self) -> int:
         return self.__id
-    
+
     @property
     def actor(self) -> Actor:
         return self.__actor
 
     @property
-    def withheld(self) ->  str:
+    def withheld(self) -> str:
         return self.__withheld
-    
+
     @property
-    def created_at(self) ->  str:
+    def created_at(self) -> str:
         return self.__created_at
 
     @property
-    def harvested_at(self) ->  str:
+    def harvested_at(self) -> str:
         return self.__harvested_at
-    
+
     @property
-    def conversation_id(self) ->  str:
+    def conversation_id(self) -> str:
         return self.__conversation_id
-    
+
     @property
-    def lang(self) ->  str:
+    def lang(self) -> str:
         return self.__lang
 
     @property
-    def text(self) ->  str:
+    def text(self) -> str:
         return self.__text
-    
+
     @property
-    def public_metrics(self) ->  str:
+    def public_metrics(self) -> str:
         return self.__public_metrics
 
     def __str__(self):
         return f"{self.__class__.__name__}(id='@{self.__id}', text={self.__text}, actor='{self.__actor})"
-    
+
     def __iter__(self):
         yield 'id', self.__id
         yield 'actor_id', self.__actor.id
@@ -82,15 +82,18 @@ class Tweet:
         yield 'lang', self.__lang
         yield 'spectrum', self.__actor.spectrum
 
+
 def get_actor_tweets(client: tweepy.Client, actor: Actor) -> Iterator[Tweet]:
     tweets = tweepy.Paginator(
-        client.get_users_tweets, actor.id, 
-        tweet_fields=['created_at', 'public_metrics', 'lang', 'author_id', 'conversation_id', 'context_annotations', 'withheld'],
+        client.get_users_tweets, actor.id,
+        tweet_fields=['created_at', 'public_metrics', 'lang', 'author_id',
+                      'conversation_id', 'context_annotations', 'withheld'],
         max_results=100, limit=40
     ).flatten()
     for tweet in tweets:
         withheld = tweet.withheld != None
-        harvested_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S%z")
+        harvested_at = datetime.now(
+            timezone.utc).strftime("%Y-%m-%d %H:%M:%S%z")
         harvested_at = f'{harvested_at[0:-2]}:{harvested_at[-2:]}'
         yield Tweet(
             tweet.id,

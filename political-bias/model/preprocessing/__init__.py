@@ -14,31 +14,37 @@ with open(EMOJI_LEXICONS_PATH, 'r', encoding="utf-8-sig") as emoji_file:
     for row in csv_reader:
         EMOJI_LEXICONS_TRANSLATOR[row['emoji']] = row['text']
 
-def remove_retweet(token: str) -> str: 
-    if token.lower()=='rt':
+
+def remove_retweet(token: str) -> str:
+    if token.lower() == 'rt':
         return ''
     return token
 
-def remove_hashtags(token: str) -> str: 
+
+def remove_hashtags(token: str) -> str:
     if '#' in token:
         return ''
     return token
 
-def remove_punctuation(token: str) -> str: 
+
+def remove_punctuation(token: str) -> str:
     if token in string.punctuation:
         if token in ',.!?':
             return token
         return ''
     return token
 
+
 def remove_url(token: str) -> str:
     return re.sub(r'^https?:\/\/.*[\r\n]*', '', token, flags=re.MULTILINE)
+
 
 def remove_emoji(token: str, emoji_translator: Dict[str, str]) -> str:
     if token in emoji_translator.keys():
         return re.sub(token, emoji_translator[token], token, flags=re.MULTILINE)
 
     return token
+
 
 def preprocess_token(token: str) -> str:
     token = remove_retweet(token)
@@ -48,6 +54,7 @@ def preprocess_token(token: str) -> str:
     token = remove_emoji(token, EMOJI_LEXICONS_TRANSLATOR)
 
     return token
+
 
 def preprocessing(tweet: str, tokenizer: TweetTokenizer) -> str:
     return ' '.join([preprocess_token(token) for token in tokenizer.tokenize(tweet)]).strip()
